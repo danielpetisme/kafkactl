@@ -1,0 +1,15 @@
+clusters:
+  cluster3:
+    foo3: bar3
+
+users:
+  user3:
+    username: user3
+    password: Passw0rd
+
+contexts:
+  context3:
+    user: user3
+    cluster: cluster3
+
+current-context: context3
