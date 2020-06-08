@@ -3,8 +3,6 @@ package kafkactl.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import kafkactl.config.ConfigFormat;
-import kafkactl.config.KafkaConfigResolver;
 import kafkactl.model.KafkaConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +10,8 @@ import org.slf4j.LoggerFactory;
 import javax.enterprise.context.ApplicationScoped;
 import java.io.*;
 import java.nio.file.Files;
-import java.util.Optional;
+import java.util.Collections;
+import java.util.Map;
 
 @ApplicationScoped
 public class ConfigService {
@@ -30,10 +29,10 @@ public class ConfigService {
     public KafkaConfig load(File file) {
         if (!file.exists()) {
             log.warn("Config not found: \"{}\"", file.getAbsolutePath());
-            return new KafkaConfig();
+            return KafkaConfig.empty();
         }
         try (var reader = Files.newBufferedReader(file.toPath())) {
-            return objectMapper.readValue(reader, KafkaConfig.class);
+            return KafkaConfig.fromMap(objectMapper.readValue(reader, Map.class));
         } catch (IOException e) {
             log.error(e.getMessage());
             throw new RuntimeException("Error loading config file \"" + file.getAbsolutePath() + "\": " + e.getMessage());
