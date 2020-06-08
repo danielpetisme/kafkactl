@@ -51,15 +51,6 @@ public class KafkaConfigProviderTest {
         assertThat(config.clusters.isEmpty()).isTrue();
     }
 
-//    @Test
-//    public void should_use_explicit_context_arg_when_defined() {
-//        var resolver = new KafkaConfigResolver(new ConfigService());
-//        resolver.envVarSupplier = () -> kafkaConfigEnvVar(fromResources("configs/config1"), " ", fromResources("configs/config2"), emptyString));
-//        resolver.setContext("context2");
-//        var config = resolver.getKafkaConfig();
-//        assertThat(config.currentContext).isEqualToIgnoringCase("context2");
-//    }
-
     @Test
     public void should_use_current_context_from_merged_config_when_no_explicit_context_defined() {
         var resolver = new KafkaConfigProvider(new ConfigService(), null);
