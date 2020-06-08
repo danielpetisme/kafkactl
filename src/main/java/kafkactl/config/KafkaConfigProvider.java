@@ -2,7 +2,6 @@ package kafkactl.config;
 
 import kafkactl.cmd.KafkaCtl;
 import kafkactl.model.KafkaConfig;
-import kafkactl.service.ConfigService;
 import picocli.CommandLine;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -30,5 +29,11 @@ public class KafkaConfigProvider {
     public KafkaConfig getKafkaConfig() {
         return resolver.getKafkaConfig();
     }
+
+//    @Produces
+//    @CurrentContext
+//    public String getCurrentContext() {
+//        return resolver.getCurrentContext();
+//    }
 
 }

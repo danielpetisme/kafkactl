@@ -74,11 +74,7 @@ public class KafkaConfigResolver {
 
     KafkaConfig getKafkaConfig() {
         var config = loadKafkaConfig();
-        var contextToTuse = context != null ? context : config.getCurrentContext();
-        if (context != null) {
-            config = config.getContextAsConfig(context);
-        } else {
-        }
+//        var contextToTuse = context != null ? context : config.getCurrentContext();
         return config;
     }
 
@@ -114,7 +110,7 @@ public class KafkaConfigResolver {
 
         var files = getEnvVarKafkaConfigFiles();
         if (!files.isEmpty()) {
-            var config = new KafkaConfig();
+            var config = KafkaConfig.empty();
             for (var file : files) {
                 var loaded = configService.load(file);
                 config = config.merge(loaded);
@@ -128,7 +124,7 @@ public class KafkaConfigResolver {
             return configService.load(globalKafkaConfig);
         }
 
-        return new KafkaConfig();
+        return KafkaConfig.empty();
     }
 
 
@@ -147,4 +143,12 @@ public class KafkaConfigResolver {
     public File getGlobalKafkaConfigFile() {
         return new File(globalFileSupplier.get());
     }
+
+//    public String getCurrentContext() {
+//        if (context != null) {
+//            return context;
+//        }
+//        var config = loadKafkaConfig();
+//        return config.getCurrentContext();
+//    }
 }

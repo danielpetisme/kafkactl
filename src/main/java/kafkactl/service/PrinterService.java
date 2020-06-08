@@ -7,6 +7,7 @@ import kafkactl.config.OutputFormat;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.io.IOException;
+import java.io.PrintStream;
 
 @ApplicationScoped
 public class PrinterService {
