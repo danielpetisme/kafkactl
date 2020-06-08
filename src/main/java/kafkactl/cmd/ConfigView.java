@@ -1,7 +1,6 @@
 package kafkactl.cmd;
 
 import kafkactl.config.ExplicitContext;
-import kafkactl.config.KafkaConfigResolver;
 import kafkactl.model.KafkaConfig;
 import kafkactl.service.PrinterService;
 import org.slf4j.Logger;
